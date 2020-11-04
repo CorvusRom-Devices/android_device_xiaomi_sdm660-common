@@ -639,3 +639,11 @@ USE_DEVICE_SPECIFIC_IPACFG_MGR := true
 PRODUCT_PACKAGES += \
     GalleryGo \
     Gboard
+
+# iorap
+PRODUCT_PACKAGES += \
+    iorap-app-startup-runner
+
+# SimpleDeviceConfigOverlay
+PRODUCT_PACKAGES += \
+    SimpleDeviceConfigOverlay

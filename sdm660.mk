@@ -48,6 +48,7 @@ $(call inherit-product, $(COMMON_PATH)/common_prop.mk)
 
 # Inherit properties ($PATH_PROP)
 TARGET_PRODUCT_PROP += $(COMMON_PATH)/product.prop
+TARGET_SYSTEM_EXT_PROP += $(COMMON_PATH)/system_ext.prop
 
 # A/B
 ifeq ($(ENABLE_AB), true)

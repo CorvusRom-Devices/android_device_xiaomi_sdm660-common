@@ -22,10 +22,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.sys.offload.pstimeout.secs=3 \
     persist.audio.in_mmap_delay_micros=100 \
     persist.audio.out_mmap_delay_micros=150 \
+    persist.vendor.audio.ras.enabled=true \
     persist.vendor.audio.fluence.speaker=true \
     persist.vendor.audio.fluence.voicecall=true \
     persist.vendor.audio.fluence.voicerec=false \
     persist.vendor.audio.hifi.int_codec=true \
+    persist.audio.fluence.voicecomm=true \
+    persist.vendor.audio.avs.afe_api_version=2 \
+    ro.vendor.audio.sos=true \
+    persist.vendor.audio.spv3.enable=true \
     persist.vendor.audio.hw.binder.size_kbyte=1024 \
     persist.vendor.audio.ras.enabled=false \
     ro.af.client_heap_size_kbyte=7168 \
@@ -79,9 +84,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.feature.external_speaker_tfa.enable=false \
     vendor.audio.feature.fluence.enable=true \
     vendor.audio.feature.fm.enable=true \
-    vendor.audio.feature.hdmi_edid.enable=false \
-    vendor.audio.feature.hdmi_passthrough.enable=false \
-    vendor.audio.feature.hfp.enable=false \
+    vendor.audio.feature.hdmi_edid.enable=true \
+    vendor.audio.feature.hdmi_passthrough.enable=true \
+    vendor.audio.feature.hfp.enable=true \
+    vendor.audio.feature.wsa.enable=true \
+    vendor.audio.feature.snd_mon.enable=true \
     vendor.audio.feature.hifi_audio.enable=true \
     vendor.audio.feature.hwdep_cal.enable=false \
     vendor.audio.feature.incall_music.enable=false \
@@ -108,14 +115,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.feature.spkr_prot.enable=true
 endif
 
-# Bluetooth
+# Bluetooth & FM
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.bluetooth.a2dp_offload.disabled=false \
     persist.bluetooth.bluetooth_audio_hal.disabled=false \
     persist.vendor.bt.aac_frm_ctl.enabled=true \
     persist.vendor.qcom.bluetooth.enable.splita2dp=false \
     ro.vendor.bluetooth.wipower=false \
-    vendor.qcom.bluetooth.soc=cherokee
+    vendor.qcom.bluetooth.soc=cherokee \
+    bt.max.hfpclient.connections=1 \
+    ro.vendor.fm.use_audio_session=true \
+    vendor.hw.fm.init=0
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     vendor.bluetooth.soc=cherokee
@@ -129,7 +139,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.camera.exif.make=Xiaomi \
     vendor.camera.aux.packageblacklist=com.discord \
     camera.aux.packagelist=com.google.android.GoogleCamera,com.android.camera,org.codeaurora.snapcam \
-    vendor.camera.aux.packagelist=com.google.android.GoogleCamera,com.android.camera,org.codeaurora.snapcam
+    vendor.camera.aux.packagelist=com.google.android.GoogleCamera,com.android.camera,org.codeaurora.snapcam \
+    persist.sys.camera.camera2=true \
+    persist.vendor.camera.privapp.list=org.codeaurora.snapcam \
+    persist.vendor.camera.preview.ubwc=0 \
+    persist.vendor.camera.isp.clock.optmz=0 \
+    persist.vendor.camera.isp.turbo=1 \
+    persist.vendor.camera.imglib.usefdlite=1 \
+    persist.vendor.camera.expose.aux=1 \
+    persist.vendor.camera.awb.sync=2 \
+    persist.vendor.camera.manufacturer=Xiaomi \
+    persist.vendor.camera.model=Redmi Note 7
 
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -142,7 +162,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.latch_unsignaled=1 \
+    debug.sf.latch_unsignaled=0 \
     debug.sf.enable_hwc_vds=1 \
     debug.sf.hw=1 \
     debug.sf.disable_backpressure=0 \
@@ -155,7 +175,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610 \
     vendor.display.disable_skip_validate=1 \
     vendor.gralloc.enable_fb_ubwc=1 \
-    vendor.display.enable_default_color_mode=0
+    dev.pm.dyn_samplingrate=1 \
+    persist.demo.hdmirotationlock=false \
+    persist.hwc.enable_vds=1 \
+    ro.vendor.display.cabl=2 \
+    vendor.display.enable_default_color_mode=1
+
+# DRM
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.service.enabled=true
 
 # The default sf phase offset is set to 6ms, to avoid it be included into next
 # vsync threshold, set high fps early sf and next vsync threshold phase offset
@@ -164,6 +192,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.high_fps_early_phase_offset_ns=6100000 \
     debug.sf.high_fps_early_gl_phase_offset_ns=9000000 \
     debug.sf.phase_offset_threshold_for_next_vsync_ns=6100000
+
+# GPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.backup.ntpServer="0.pool.ntp.org" \
+    persist.vendor.overlay.izat.optin=rro
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -202,15 +235,35 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.omx_default_rank.sw-audio=1 \
     debug.stagefright.omx_default_rank=0 \
     media.stagefright.thumbnail.prefer_hw_codecs=true \
-    ro.media.recorder-max-base-layer-fps=60 \
     vendor.vidc.dec.enable.downscalar=1 \
     vendor.vidc.enc.disable.pq=true \
     vendor.vidc.enc.disable_bframes=1 \
-    vidc.enc.dcvs.extra-buff-count=2
+    vidc.enc.dcvs.extra-buff-count=2 \
+    media.stagefright.enable-http=true \
+    media.stagefright.enable-aac=true \
+    media.aac_51_output_enabled=true \
+    mm.enable.smoothstreaming=true \
+    vidc.enc.target_support_bframe=1 \
+    vendor.mm.enable.qcom_parser=13631487 \
+    vendor.video.disable.ubwc=1 \
+    ro.media.recorder-max-base-layer-fps=60
 
 # Memory optimizations
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.bservice_enable=true
+
+# MISC
+PRODUCT_PROPERTY_OVERRIDES += \
+    keyguard.no_require_sim=true \
+    persist.vendor.delta_time.enable=true \
+    qemu.hw.mainkeys=0 \
+    ro.com.android.dataroaming=false \
+    ro.vendor.qti.sys.fw.bservice_enable=true \
+    ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# Netflix custom property
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.netflix.bsp_rev=Q660-13149-1
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -222,7 +275,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.dpm.feature=1 \
     persist.vendor.dpm.nsrm.bkg.evt=3955 \
     persist.vendor.qcomsysd.enabled=1 \
-    ro.vendor.extension_library=libqti-perfd-client.so
+    ro.vendor.extension_library=libqti-perfd-client.so \
+    persist.vendor.dpm.feature=1
 
 # QTI
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -234,16 +288,20 @@ PRODUCT_ODM_PROPERTIES += \
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.data.mode=concurrent \
-    persist.vendor.qti.telephony.vt_cam_interface=1 \
+    persist.data.df.dev_name=rmnet_usb0 \
+    persist.debug.coresight.config=stm-events \
+    persist.timed.enable=true \
+    persist.vendor.data.iwlan.enable=true \
     persist.vendor.radio.apm_sim_not_pwdn=1 \
+    persist.vendor.radio.sib16_support=1 \
+    persist.vendor.qti.telephony.vt_cam_interface=1 \
     persist.vendor.radio.atfwd.start=true \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.data_con_rprt=1 \
     persist.vendor.radio.rat_on=combine \
-    persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.procedure_bytes=SKIP \
-    vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so \
-    ro.telephony.default_network=9,9 \
+    persist.backup.ntpServer=0.pool.ntp.org \
+    persist.radio.multisim.config=dsds \
     ro.telephony.iwlan_operation_mode=legacy \
     ro.vendor.use_data_netmgrd=true
 
@@ -258,35 +316,50 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.enable.sglscale=1 \
     debug.sf.disable_hwc=0 \
     debug.sf.gpu_comp_tiling=1 \
-    debug.sf.recomputecrop=0
+    debug.sf.recomputecrop=0 \
+    persist.dbg.ims_volte_enable=1 \
+    persist.dbg.wfc_avail_ovr=1 \
+    persist.vendor.ims.disableADBLogs=1 \
+    persist.vendor.ims.disableIMSLogs=1 \
+    persist.vendor.radio.data_ltd_sys_ind=1 \
+    persist.vendor.radio.force_ltd_sys_ind=1 \
+    persist.radio.calls.on.ims=1
 
 # Sensor
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.sensors.facing=false \
     ro.vendor.sdk.sensors.gestures=false \
     ro.vendor.sensors.cmc=false \
     ro.vendor.sensors.dev_ori=false \
-    ro.vendor.sensors.facing=false \
     ro.vendor.sensors.mot_detect=true \
     ro.vendor.sensors.pmd=true \
-    ro.vendor.sensors.sta_detect=true
+    ro.vendor.sensors.sta_detect=true \
+    ro.vendor.sensors.mot_detect=true
 
 # SurfaceFlinger
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    debug.sf.disable_backpressure=1 \
+    debug.sf.enable_gl_backpressure=1 \
+    debug.sdm.support_writeback=0 \
+    debug.sf.latch_unsignaled=1
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
+    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
     ro.surface_flinger.max_virtual_display_dimension=4096 \
-    ro.surface_flinger.protected_contents=true
+    ro.surface_flinger.supports_background_blur=1 \
+    ro.sf.blurs_are_expensive=1
 
 # System restart
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ssr.restart_level=ALL_ENABLE
 
 # Thermal configs path
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     sys.thermal.data.path=/data/vendor/thermal/
 
 # WFD
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0
 

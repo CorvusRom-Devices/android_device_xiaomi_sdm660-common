@@ -1,7 +1,5 @@
-
 # Art
 ro.sys.fw.dex2oat_thread_count=8
-audio.safemedia.bypass=true
 
 # Audio
 audio.safemedia.bypass=true
@@ -45,22 +43,6 @@ ro.config.bt_sco_vol_steps=30
 # LMKD
 ro.lmk.log_stats=true
 ro.lmk.use_psi=false
-
-# Media
-media.aac_51_output_enabled=true
-media.stagefright.enable-aac=true
-media.stagefright.enable-http=true
-media.stagefright.enable-player=true
-media.stagefright.enable-qcp=true
-media.stagefright.enable-scan=true
-mm.enable.qcom_parser=13631471
-mm.enable.smoothstreaming=true
-mmp.enable.3g2=true
-persist.mm.enable.prefetch=true
-vidc.enc.target_support_bframe=1
-
-# Netflix custom property
-ro.netflix.bsp_rev=Q660-13149-1
 
 # Proximity
 gsm.proximity.enable=true

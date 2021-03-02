@@ -43,8 +43,8 @@ $(call inherit-product, vendor/xiaomi/sdm660-common/sdm660-common-vendor.mk)
 # Common Tree Path
 COMMON_PATH := device/xiaomi/sdm660-common
 
-# Inherit properties
-$(call inherit-product, $(COMMON_PATH)/common_prop.mk)
+# Vendor properties.mk
+-include $(COMMON_PATH)/vendor_prop.mk
 
 # Inherit properties ($PATH_PROP)
 TARGET_PRODUCT_PROP += $(COMMON_PATH)/product.prop

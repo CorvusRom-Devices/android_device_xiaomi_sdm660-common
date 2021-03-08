@@ -182,6 +182,7 @@ vidc.enc.target_support_bframe=1
 vendor.mm.enable.qcom_parser=13631487
 vendor.video.disable.ubwc=1
 ro.media.recorder-max-base-layer-fps=60
+sys.display-size=3840x2160
 
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true

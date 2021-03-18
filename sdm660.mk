@@ -93,7 +93,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.audio.effect@2.0-service \
     android.hardware.audio.service \
-    android.hardware.soundtrigger@2.2-impl\
+    android.hardware.soundtrigger@2.2-impl \
     audio.a2dp.default \
     audio_amplifier.sdm660 \
     audio.primary.sdm660 \
@@ -107,7 +107,8 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libvolumelistener
+    libvolumelistener \
+    sound_trigger.primary.sdm660
 
 # Audio Configs
 PRODUCT_COPY_FILES += \

@@ -68,3 +68,11 @@ allow system_app sysfs:file { getattr open read write };
 allow system_app sysfs_egain:file { open read getattr write };
 allow system_app sysfs_hgain:file { open read getattr write };
 allow system_app sysfs_mgain:file { open read getattr write };
+
+# Battery
+allow system_app sysfs_battery_supply:dir { search };
+allow system_app sysfs_battery_supply:file { read open getattr };
+allow system_app sysfs_batteryinfo:dir { search };
+allow system_app sysfs_batteryinfo:file { read open getattr };
+r_dir_file(system_app, sysfs_battery_supply)
+allow system_app sysfs:file { read open getattr };

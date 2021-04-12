@@ -1,0 +1,3 @@
+allow untrusted_app_27 blkio_dev:dir search;
+allow untrusted_app_27 cache_file:lnk_file read;
+

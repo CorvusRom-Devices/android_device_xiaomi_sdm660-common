@@ -12,7 +12,6 @@ ro.max.fling_velocity=20000
 # GMS
 ro.com.google.clientidbase.ms=android-xiaomi-rev2
 ro.com.google.clientidbase=android-xiaomi
-ro.com.google.ime.kb_pad_port_b=1
 ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent
 ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html
 ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html
@@ -52,10 +51,6 @@ ro.lmk.downgrade_pressure=100
 ro.lmk.kill_heaviest_task=true
 ro.lmk.kill_timeout_ms=100
 ro.lmk.use_minfree_levels=true
-
-# Octavi
-ro.octavi.status=2.1 OFFICIAL
-ro.octavi.maintainer=CHRISL7
 
 # OEM Unlock reporting
 ro.oem_unlock_supported=1

@@ -81,3 +81,10 @@ allow system_app sysfs_batteryinfo:dir { search };
 allow system_app sysfs_batteryinfo:file { read open getattr };
 r_dir_file(system_app, sysfs_battery_supply)
 allow system_app sysfs:file { read open getattr };
+
+#allow platform_app default_android_service:service_manager { find };
+allow system_app default_android_service:service_manager { find };
+allow priv_app theme_prop:file w_file_perms;
+
+# Flipendo
+allow platform_app hal_power_service:service_manager { find };

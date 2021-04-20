@@ -1,2 +1,5 @@
+allow system_server sysfs:file { read };
+allow system_server default_android_service:service_manager { add };
+
 # Allow system_server to set persist_camera_prop
 get_prop(system_server, vendor_persist_camera_prop)
